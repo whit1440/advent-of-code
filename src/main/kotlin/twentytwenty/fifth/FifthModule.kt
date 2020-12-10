@@ -64,7 +64,7 @@ object FifthModule {
                 it > 7
             }.takeWhile {
                 // eliminate back row
-                it < 1024 // (max 
+                it < 1024 // (max seat id)
             }.fold(0) { acc, i ->
                 if (i - acc == 2) return acc + 1
                 else i
