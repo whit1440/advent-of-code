@@ -4,6 +4,7 @@ import dagger.Component
 import dagger.Module
 import dagger.Provides
 import twentytwenty.first.FirstModule
+import twentytwenty.fourth.FourthModule
 import twentytwenty.second.SecondModule
 import twentytwenty.sixth.SixthModule
 import twentytwenty.third.ThirdModule
@@ -35,6 +36,7 @@ class Main @Inject constructor(
     FirstModule::class,
     SecondModule::class,
     ThirdModule::class,
+    FourthModule::class,
     SixthModule::class
 ])
 object MainModule
