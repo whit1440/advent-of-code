@@ -7,10 +7,16 @@ import twentytwenty.fifth.FifthModule
 import twentytwenty.first.FirstModule
 import twentytwenty.fourth.FourthModule
 import twentytwenty.second.SecondModule
+import twentytwenty.seventh.SeventhModule
 import twentytwenty.sixth.SixthModule
 import twentytwenty.third.ThirdModule
+import java.time.Duration
+import java.time.temporal.TemporalUnit
 import javax.inject.Inject
+import kotlin.time.ExperimentalTime
+import kotlin.time.toKotlinDuration
 
+@ExperimentalTime
 fun main() {
     DaggerMainComponent.builder().build().inject().run()
 }
@@ -24,10 +30,14 @@ interface Solution {
 class Main @Inject constructor(
     private val solutions: Set<@JvmSuppressWildcards Solution>
 ) {
+    @ExperimentalTime
     fun run() {
         val compare = compareBy<Solution> { it.day }.thenBy { it.part }
         solutions.sortedWith(compare).forEach {
-            println("Dec ${it.day.toPosition()} - part ${it.part} - ${it.solve()}")
+            val start = System.nanoTime()
+            val solution = it.solve()
+            val end = System.nanoTime() - start
+            println("Dec ${it.day.toPosition().padStart(4)} - part ${it.part} : " + "$solution".padEnd(20) + "solved in ${Duration.ofNanos(end).toKotlinDuration().inMilliseconds}ms")
         }
     }
 }
@@ -39,7 +49,8 @@ class Main @Inject constructor(
     ThirdModule::class,
     FourthModule::class,
     FifthModule::class,
-    SixthModule::class
+    SixthModule::class,
+    SeventhModule::class
 ])
 object MainModule
 

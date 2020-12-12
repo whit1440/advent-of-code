@@ -68,7 +68,6 @@ object ThirdModule {
             ).map {
                 run(it.first, it.second, input).toLong()
             }.fold(1L) { acc, i ->
-                println("$acc $i")
                 acc * i
             }
         }
